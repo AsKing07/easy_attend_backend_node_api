@@ -16,6 +16,10 @@ app.use('/api/admin', adminRoutes);
 // app.use('/api/student',  studentRoutes);
 app.use('/api/teacher',  teacherRoutes);
 app.use('/api/global', globalRoutes);
+app.get('/home', (req, res) => {
+  res.status(200).json('Welcome, your app is working well');
+})
+
 
 app.use(errorHandler);
 
