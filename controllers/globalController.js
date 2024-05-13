@@ -27,7 +27,7 @@ exports.getStudentByMatricule = (req, res) => {
     db.query(sql, [matricule], (err, result) => {
       if (err) throw err;
 console.log(result);
-
+ 
       if (result.length > 0) {
         // L'utilisateur existe dans la base de données SQL, renvoyer ses informations
         res.send(result[0]);
