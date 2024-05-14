@@ -104,7 +104,7 @@ exports.createSeance = (req, res) => {
   {
     
     const idCours = req.query.idCours; 
-    const code = req.query.code;
+    
    
     let sqlQuery = 'SELECT * FROM seance  ';
 
@@ -115,12 +115,9 @@ exports.createSeance = (req, res) => {
       sqlQuery += ` WHERE idCours = ${idCours} `;
     }
 
-    if (code)
-    {
+    
 
-    }
-
-    sqlQuery += ' ORDER BY   dateSeance DESC ';
+    sqlQuery += ' ORDER BY  dateSeance DESC ';
 
   
   
@@ -128,8 +125,8 @@ exports.createSeance = (req, res) => {
     // Exécuter la requête SQL
     db.query(sqlQuery, (err, result) => {
       if (err) {
-        console.error(err);
-        res.status(500).send('Erreur lors de la récupération des cours');
+        console.log(err);
+        res.status(500).send('Erreur lors de la récupération des seances');
       } else {
         res.status(200).json(result);
     //    console.log(result);
