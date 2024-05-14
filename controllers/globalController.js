@@ -193,7 +193,7 @@ if(result)
     //Recupérer les filières actives selon la recherche
     exports.getFiliereData = (req, res) =>
     {
-      {
+      
         const searchText = req.query.search; // Récupérer la valeur de searchText depuis la requête
       
         let sqlQuery = 'SELECT * FROM filiere WHERE statut = true';
@@ -206,14 +206,14 @@ if(result)
         // Exécuter la requête SQL
         db.query(sqlQuery, (err, result) => {
           if (err) {
-            console.error(err);
+            console.log(err);
             res.status(500).send('Erreur lors de la récupération des filières');
           } else {
             res.status(200).json(result);
             console.log(result);
           }
         });
-      }
+      
     }
 
   //PROF
