@@ -104,14 +104,20 @@ exports.createSeance = (req, res) => {
   {
     
     const idCours = req.query.idCours; 
+    const code = req.query.code;
    
     let sqlQuery = 'SELECT * FROM seance  ';
 
     
-  
+
 
     if (idCours) {
       sqlQuery += ` WHERE idCours = ${idCours} `;
+    }
+
+    if (code)
+    {
+
     }
 
     sqlQuery += ' ORDER BY   dateSeance DESC ';
@@ -131,3 +137,27 @@ exports.createSeance = (req, res) => {
     });
   }
 }
+
+exports.getSeanceByCode = (req, res) => {
+  const { code } = req.params;
+console.log(req.params)
+  // Vérifier si l'utilisateur existe dans la base de données SQL
+  const sql = 'SELECT * FROM seance WHERE codeSeance = ?';
+  db.query(sql, [code], (err, result) => {
+    if (err) throw err;
+console.log(result);
+if(result)
+{
+console.log(result.length);
+
+}
+    if (result.length > 0) {
+      res.send(result[0]);
+    } else {
+      
+      res.status(404).send('Seance not found in SQL database');
+
+      
+    }
+  });
+};
