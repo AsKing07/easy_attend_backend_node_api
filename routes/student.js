@@ -18,6 +18,7 @@ router.put('/', studentController.updateStudentById);
 router.get('/getStudentByMatricule', studentController.getStudentByMatricule);
 router.get('/getStudentById/:id', studentController.getStudentById);
 router.get('/getActifStudentData', studentController.getActifStudentData);
+router.get('/getInactifStudentData', studentController.getInactifStudentData);
 router.get('/getStudentData', studentController.getStudentData);
 router.get('/:id', studentController.getStudentById);
 

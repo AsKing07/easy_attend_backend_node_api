@@ -207,6 +207,17 @@ exports.createStudent = (req, res) => {
         });
       
         }  
+        exports.getInactifStudentData = (req, res) =>
+        {
+          const sql = `SELECT * FROM student WHERE statut = false`;
+      
+          db.query(sql, (err, result) =>
+        {
+          console.log(result);
+          res.send(result);
+        });
+      
+        }  
         
         exports.getStudentData = (req, res) =>
         {
