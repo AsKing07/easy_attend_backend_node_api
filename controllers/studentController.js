@@ -147,7 +147,7 @@ exports.createStudent = (req, res) => {
           // Vérifier si l'utilisateur existe dans la base de données SQL
           if(id)
           {
-             sql = `SELECT * FROM student WHERE matricule = ? AND id != ${id}`;
+             sql = `SELECT * FROM student WHERE matricule = ? AND Uid = ${id}`;
       
           }
           else
