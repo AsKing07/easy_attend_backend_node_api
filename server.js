@@ -18,7 +18,7 @@ app.use(cors());
 
 app.use('/api/admin', adminRoutes);
 app.use('/api/student',  studentRoutes);
-app.use('/api/teacher',  seanceRoutes);
+app.use('/api/seance',  seanceRoutes);
 
 app.use('/api/filiere', filiereRoutes);
 app.use('/api/cours', coursRoutes);
