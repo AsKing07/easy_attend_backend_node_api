@@ -139,7 +139,7 @@ exports.getSeanceByCode = (req, res) => {
   const { code } = req.params;
 console.log(req.params)
   // Vérifier si l'utilisateur existe dans la base de données SQL
-  const sql = 'SELECT * FROM seance WHERE codeSeance = ?';
+  const sql = 'SELECT * FROM seance WHERE seanceCode = ?';
   db.query(sql, [code], (err, result) => {
     if (err) throw err;
 console.log(result);
