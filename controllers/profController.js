@@ -88,7 +88,7 @@ exports.createProf = (req, res) => {
 
      exports.getActifProfData = (req, res) =>
      {
-       const sql = `SELECT * FROM prof WHERE statut = true`;
+       const sql = `SELECT * FROM prof WHERE statut = true ORDER BY nom, prenom`;
    
        db.query(sql, (err, result) =>
      {
@@ -99,7 +99,7 @@ exports.createProf = (req, res) => {
      }  
      exports.getInactifProfData = (req, res) =>
      {
-       const sql = `SELECT * FROM prof WHERE statut = false`;
+       const sql = `SELECT * FROM prof WHERE statut = false ORDER BY nom, prenom`;
    
        db.query(sql, (err, result) =>
      {
@@ -126,6 +126,8 @@ exports.createProf = (req, res) => {
              {
                sqlQuery += ` AND prenom LIKE '%${searchText}%' `;
              }
+
+             sqlQuery += ` ORDER BY nom, prenom`;
            
              // Exécuter la requête SQL
              db.query(sqlQuery, (err, result) => {

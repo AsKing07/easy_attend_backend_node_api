@@ -198,7 +198,7 @@ exports.createStudent = (req, res) => {
       
         exports.getActifStudentData = (req, res) =>
         {
-          const sql = `SELECT * FROM student WHERE statut = true`;
+          const sql = `SELECT * FROM student WHERE statut = true ORDER BY nom, prenom`;
       
           db.query(sql, (err, result) =>
         {
@@ -209,7 +209,7 @@ exports.createStudent = (req, res) => {
         }  
         exports.getInactifStudentData = (req, res) =>
         {
-          const sql = `SELECT * FROM student WHERE statut = false`;
+          const sql = `SELECT * FROM student WHERE statut = false ORDER BY nom, prenom`;
       
           db.query(sql, (err, result) =>
         {
@@ -239,6 +239,8 @@ exports.createStudent = (req, res) => {
           {
             sqlQuery += ` AND niveau LIKE '%${niveau}%' `;
           }
+
+          sqlQuery += ` ORDER BY nom, prenom`;
         
           console.log(sqlQuery);
       
