@@ -90,20 +90,22 @@ exports.createRequest = (req, res) => {
         db.query(sql, [id], (err, result) => {
           if (err) throw err;
     console.log(result);
-    if(result)
-    {
-      console.log(result.length);
+    res.send(result[0]);
+    // if(result)
+    // {
+    //   console.log(result.length);
     
-    }
-          if (result.length > 0) {
-            res.send(result[0]);
-          } else {
-            res.status(404).send('Request not found in SQL database');
+
+    // }
+      //     if (result.length > 0) {
+      //       res.send(result[0]);
+      //     } else {
+      //       res.status(404).send('Request not found in SQL database');
     
             
-          }
-        });
-      };
+      //     }
+       });
+       };
   
 
       exports.updateRequesteStatus =(req, res) =>{
