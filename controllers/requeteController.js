@@ -88,9 +88,18 @@ exports.createRequest = (req, res) => {
       console.log(req.params)
         const sql = 'SELECT * FROM requete WHERE idRequete = ?';
         db.query(sql, [id], (err, result) => {
-          if (err) throw err;
-    console.log(result);
-    res.send(result[0]);
+          if (err) 
+          {
+            console.log(err);
+            res.status(500).send('Error while getting Request');
+
+          }
+          else
+          {
+            console.log(result);
+            res.send(result[0]);
+          }
+   
     // if(result)
     // {
     //   console.log(result.length);
