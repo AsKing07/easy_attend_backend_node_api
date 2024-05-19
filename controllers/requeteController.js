@@ -97,7 +97,13 @@ exports.createRequest = (req, res) => {
           else
           {
             console.log(result);
+                if (result.length > 0) {
             res.send(result[0]);
+          } else {
+            res.send(result);
+    
+            
+          }
           }
    
     // if(result)
