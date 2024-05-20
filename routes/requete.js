@@ -9,7 +9,7 @@ const requeteController = require('../controllers/requeteController');
 router.post('/', requeteController.createRequest);
 router.get('/getRequestData', requeteController.getRequestData);
 router.get('/getUnsolvedRequestData', requeteController.getUnsolvedRequestData);
-router.get('/:id', requeteController.getRequestById);
+router.get('/:id', requeteController.getRequestByUserId);
 router.put('/updateRequestStatus', requeteController.updateRequesteStatus);
 
 module.exports = router;

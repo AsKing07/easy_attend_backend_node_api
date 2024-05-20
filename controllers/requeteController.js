@@ -83,10 +83,10 @@ exports.createRequest = (req, res) => {
         
       }
   
-      exports.getRequestById = (req, res) => {
+      exports.getRequestByUserId = (req, res) => {
         const { id } = req.params;
       console.log(req.params)
-        const sql = 'SELECT * FROM requete WHERE idRequete = ?';
+        const sql = 'SELECT * FROM requete WHERE idAuteur = ?';
         db.query(sql, [id], (err, result) => {
           if (err) 
           {
