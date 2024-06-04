@@ -16,8 +16,17 @@ exports.createAdmin = (req, res) => {
       // L'utilisateur n'existe pas dans la base de données SQL, l'ajouter
       const sql = 'INSERT INTO admin (uid, email, nom, prenom, phone) VALUES (?, ?, ?, ?, ?)';
       db.query(sql, [uid, email, nom, prenom, phone], (err, result) => {
-        if (err) throw err;
-        res.send('Admin added to SQL database');
+        if (err) 
+          {
+            res.status(500).send(`${err.message}`);
+
+          }
+          else
+          {
+            res.send('Admin added to SQL database');
+
+          }
+          
       });
     }
   });
@@ -29,7 +38,9 @@ exports.getAdmin = (req, res) => {
     // Vérifier si l'utilisateur existe dans la base de données SQL
     const sql = 'SELECT * FROM admin WHERE uid = ?';
     db.query(sql, [uid], (err, result) => {
-      if (err) throw err;
+      if (err) {
+        res.status(500).send(err);
+      };
   
       if (result.length > 0) {
         // L'utilisateur existe dans la base de données SQL, renvoyer ses informations

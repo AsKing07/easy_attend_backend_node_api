@@ -10,29 +10,27 @@ exports.createRequest = (req, res) => {
       if (err) {
         console.log(err);
         return res.status(500).send("");
+      } else if (result.length > 0) {
+        sqlQuery = `UPDATE requete SET type = ?, sujet = ?, details = ?, statut = ?, dateCreation = ? WHERE idAuteur = ?`;
+        db.query(sqlQuery, [type, sujet, details, "2", dateCreation, idAuteur], (err, updateResult) => {
+          console.log(sqlQuery);
+          if (err) {
+            console.log(err);
+            return res.status(500).send("");
+          } else {
+            return res.status(200).send("Requete mise à jour");
+          }
+        });
       } else {
-        if (result.length > 0) {
-          sqlQuery = `UPDATE requete SET type = ?, sujet = ?, details = ?, statut = ?, dateCreation = ? WHERE idAuteur = ?`;
-          db.query(sqlQuery, [type, sujet, details, "2", dateCreation, idAuteur], (err, updateResult) => {
-            console.log(sqlQuery);
-            if (err) {
-              console.log(err);
-              return res.status(500).send("");
-            } else {
-              return res.status(200).send("Requete mise à jour");
-            }
-          });
-        } else {
-          sqlQuery = "INSERT INTO requete(idAuteur, type, sujet, details, statut, dateCreation) VALUES(?, ?, ?, ?, ?, ?)";
-          db.query(sqlQuery, [idAuteur, type, sujet, details, "2", dateCreation], (err, insertResult) => {
-            if (err) {
-              console.log(err);
-              return res.status(500).send("");
-            } else {
-              return res.status(200).send("Requete créée");
-            }
-          });
-        }
+        sqlQuery = "INSERT INTO requete(idAuteur, type, sujet, details, statut, dateCreation) VALUES(?, ?, ?, ?, ?, ?)";
+        db.query(sqlQuery, [idAuteur, type, sujet, details, "2", dateCreation], (err, insertResult) => {
+          if (err) {
+            console.log(err);
+            return res.status(500).send("");
+          } else {
+            return res.status(200).send("Requete créée");
+          }
+        });
       }
     });
   }; 
@@ -166,4 +164,5 @@ exports.createRequest = (req, res) => {
       });
     
       }
+    
     
