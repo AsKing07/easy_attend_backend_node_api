@@ -25,7 +25,7 @@ function handleDisconnect() {
 
     connection.on('error', err => {
         console.error('db error', err);
-        if (err.code === 'PROTOCOL_CONNECTION_LOST' || err.code === 'ECONNRESET') {
+        if (err.code === 'PROTOCOL_CONNECTION_LOST' || err.code === 'ECONNRESET' || err.code==='PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR') {
             handleDisconnect();
         } else {
             throw err;
