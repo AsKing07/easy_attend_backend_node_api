@@ -22,7 +22,7 @@ const pool = require('../config/db');
 
 // }
 exports.updateSeancePresence = (req, res) => {
-  const { seanceId, etudiantId } = req.body;
+  const { seanceId, presence } = req.body;
 
   pool.getConnection((err, connection) => {
       if (err) {
@@ -41,17 +41,18 @@ exports.updateSeancePresence = (req, res) => {
                   return connection.rollback(() => {
                       connection.release();
                       res.status(500).send('Error retrieving seance');
+                      console.log("Error retrieving seance");
                   });
               }
 
               const seance = results[0];
-              const presence = JSON.parse(seance.presenceEtudiant);
-              presence[etudiantId] = true;
+            //   const presence = JSON.parse(seance.presenceEtudiant);
+            //   presence[etudiantId] = true;
 
-              const newPresenceJson = JSON.stringify(presence);
+            //   const newPresenceJson = JSON.stringify(presence);
               const newVersion = seance.version + 1;
 
-              connection.query('UPDATE seance SET presenceEtudiant = ?, version = ? WHERE id = ? AND version = ?', [newPresenceJson, newVersion, seanceId, seance.version], (err, results) => {
+              connection.query('UPDATE seance SET presenceEtudiant = ?, version = ? WHERE id = ? AND version = ?', [JSON.stringify(presence), newVersion, seanceId, seance.version], (err, results) => {
                   if (err || results.affectedRows === 0) {
                       return connection.rollback(() => {
                           connection.release();
@@ -61,6 +62,7 @@ exports.updateSeancePresence = (req, res) => {
 
                   connection.commit(err => {
                       if (err) {
+                        console.error(err);
                           return connection.rollback(() => {
                               connection.release();
                               res.status(500).send('Commit error');
