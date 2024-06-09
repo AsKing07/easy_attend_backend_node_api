@@ -40,8 +40,9 @@ exports.updateSeancePresence = (req, res) => {
               if (err || results.length === 0) {
                   return connection.rollback(() => {
                       connection.release();
-                      res.status(500).send('Error retrieving seance');
+                      res.status(500).send('Error retrieving seance. ${err)');
                       console.log("Error retrieving seance");
+                    console.error(err);
                   });
               }
 
