@@ -23,7 +23,7 @@ const pool = require('../config/db');
 // }
 exports.updateSeancePresence = (req, res) => {
   const { seanceId, presence } = req.body;
-
+console.log(seanceId);
   pool.getConnection((err, connection) => {
       if (err) {
           console.error('Error getting connection from pool:', err);
@@ -41,8 +41,8 @@ exports.updateSeancePresence = (req, res) => {
                   return connection.rollback(() => {
                       connection.release();
                       res.status(500).send('Error retrieving seance. ${err)');
-                      console.log("Error retrieving seance");
-                    console.error(err);
+                      console.log("Error retrieving seance : ${results}");
+                  
                   });
               }
 
