@@ -1,6 +1,6 @@
-// db.js
 const mysql = require('mysql');
 require('dotenv').config();
+
 let connection;
 
 function handleDisconnect() {
@@ -16,16 +16,14 @@ function handleDisconnect() {
         if (err) {
             console.error('error when connecting to db:', err);
             setTimeout(handleDisconnect, 2000);
-        }
-        else
-        {
+        } else {
             console.log("Connected to the database");
         }
     });
 
     connection.on('error', err => {
         console.error('db error', err);
-        if (err.code === 'PROTOCOL_CONNECTION_LOST' || err.code === 'ECONNRESET' || err.code==='PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR') {
+        if (err.code === 'PROTOCOL_CONNECTION_LOST' || err.code === 'ECONNRESET' || err.code === 'PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR') {
             handleDisconnect();
         } else {
             throw err;
@@ -35,10 +33,5 @@ function handleDisconnect() {
 
 handleDisconnect();
 
+// Export the active connection directly
 module.exports = connection;
-
-
-
-
-
-
