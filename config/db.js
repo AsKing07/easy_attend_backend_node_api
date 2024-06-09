@@ -1,7 +1,10 @@
 const mysql = require('mysql');
 require('dotenv').config();
 
-let    connection = mysql.createConnection({
+let connection;
+
+function createConnection() {
+    connection = mysql.createConnection({
         host: process.env.DB_HOST,
         user: process.env.DB_USER,
         password: process.env.DB_PASSWORD,
@@ -9,13 +12,10 @@ let    connection = mysql.createConnection({
         port: process.env.DB_PORT
     });
 
-function handleDisconnect() {
- 
-
     connection.connect(err => {
         if (err) {
             console.error('error when connecting to db:', err);
-            setTimeout(handleDisconnect, 10000);
+            reconnect();
         } else {
             console.log("Connected to the database");
         }
@@ -24,14 +24,19 @@ function handleDisconnect() {
     connection.on('error', err => {
         console.error('db error', err);
         if (err.code === 'PROTOCOL_CONNECTION_LOST' || err.code === 'ECONNRESET' || err.code === 'PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR') {
-            handleDisconnect();
+            connection.destroy(); // Ferme la connexion avant de tenter une reconnexion
+            reconnect(); // Tente une reconnexion
         } else {
             throw err;
         }
     });
 }
 
-handleDisconnect();
+function reconnect() {
+    setTimeout(createConnection, 10000);
+}
+
+createConnection();
 
 // Export the active connection directly
 module.exports = connection;
