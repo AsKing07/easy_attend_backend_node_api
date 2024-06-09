@@ -21,7 +21,7 @@ const pool = require('../config/db');
 // }) 
 
 // }
-exports.updatePresence = (req, res) => {
+exports.updateSeancePresence = (req, res) => {
   const { seanceId, etudiantId } = req.body;
 
   pool.getConnection((err, connection) => {
