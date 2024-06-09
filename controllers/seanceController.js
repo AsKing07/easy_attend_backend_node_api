@@ -24,7 +24,6 @@ const pool = require('../config/db');
 exports.updateSeancePresence = (req, res) => {
  const seanceId = req.body.idSeance;
  const presence = req.body.presenceEtudiant;
-console.log(seanceId);
   pool.getConnection((err, connection) => {
       if (err) {
           console.error('Error getting connection from pool:', err);
