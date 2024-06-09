@@ -52,7 +52,7 @@ exports.updateSeancePresence = (req, res) => {
             //   const newPresenceJson = JSON.stringify(presence);
               const newVersion = seance.version + 1;
 
-              connection.query('UPDATE seance SET presenceEtudiant = ?, version = ? WHERE id = ? AND version = ?', [JSON.stringify(presence), newVersion, seanceId, seance.version], (err, results) => {
+              connection.query('UPDATE seance SET presenceEtudiant = ?,presenceTookOnce = ?, version = ? WHERE id = ? AND version = ?', [JSON.stringify(presence),true, newVersion, seanceId, seance.version], (err, results) => {
                   if (err || results.affectedRows === 0) {
                       return connection.rollback(() => {
                           connection.release();
