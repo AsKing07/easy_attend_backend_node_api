@@ -31,7 +31,7 @@ const pool = require('../config/db');
                 res.status(500).send('Erreur lors de la suppression des cours');
             } else {
                 res.status(200).json(result);
-                console.log(result);
+              
             }
         });
     });
@@ -73,7 +73,7 @@ const pool = require('../config/db');
                 res.status(500).send('Erreur lors de la suppression des cours associés à la filière');
             } else {
                 res.status(200).json(result);
-                console.log(result);
+             
             }
         });
     });
@@ -110,7 +110,7 @@ const pool = require('../config/db');
                 res.status(500).send('Erreur lors de la restauration des cours associés');
             } else {
                 res.status(200).json(result);
-                console.log(result);
+               
             }
         });
     });
@@ -148,7 +148,7 @@ const pool = require('../config/db');
                 res.status(500).send('Erreur lors de la suppression du cours');
             } else {
                 res.status(200).send(result);
-                console.log(result);
+               
             }
         });
     });
@@ -431,7 +431,7 @@ exports.getCoursesData = (req, res) => {
       sqlQuery += ` AND niveau LIKE '%${niveau}%' `;
   }
 
-  console.log(sqlQuery);
+  // console.log(sqlQuery);
 
   pool.getConnection((err, connection) => {
       if (err) {
@@ -444,7 +444,7 @@ exports.getCoursesData = (req, res) => {
               res.status(500).send('Erreur lors de la récupération des cours');
           } else {
               res.status(200).json(result);
-              console.log(result);
+             
           }
       });
   });
