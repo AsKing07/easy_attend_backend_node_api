@@ -45,7 +45,9 @@ const pool = require('../config/db');
             return res.status(500).send('Erreur lors de la création de la requête');
         }
 
-        sqlQuery = `SELECT * FROM requete WHERE idAuteur = ?`;
+       
+
+       sqlQuery = `SELECT * FROM requete WHERE idAuteur = ?`;
         connection.query(sqlQuery, [idAuteur], (err, result) => {
             if (err) {
                 connection.release();
@@ -77,8 +79,32 @@ const pool = require('../config/db');
         });
     });
 };
-  
-  //Recupérer les requêtes selon la recherche
+
+//supprimer une requête
+exports.deleteRequestById = (req, res) => {
+    const { idRequete } = req.params;
+    let sqlQuery;
+    
+    pool.getConnection((err, connection) => {
+        if (err) {
+            console.error('Error getting connection from pool:', err);
+            return res.status(500).send('Erreur lors de la création de la requête');
+        }
+
+        sqlQuery = "DELETE FROM requete WHERE idRequete = ?";
+        connection.query(sqlQuery, [idRequete], (err, deletetResult) => {
+            connection.release();
+            if (err) {
+                console.error(err);
+                return res.status(500).send('');
+            } else {
+                return res.status(200).send("Requête supprimée");
+            }
+        });
+
+    });
+};
+  //Recupérer les requêtes selon le status
       // exports.getRequestData = (req, res) =>
       // {      
       //     const filtre = req.query.filtre; // Récupérer la valeur du filtre depuis la requête        
