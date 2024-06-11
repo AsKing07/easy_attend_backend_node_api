@@ -88,7 +88,7 @@ exports.deleteRequestById = (req, res) => {
     pool.getConnection((err, connection) => {
         if (err) {
             console.error('Error getting connection from pool:', err);
-            return res.status(500).send('Erreur lors de la création de la requête');
+            return res.status(500).send('Erreur lors de la suppression de la requête');
         }
 
         sqlQuery = "DELETE FROM requete WHERE idRequete = ?";
@@ -98,7 +98,7 @@ exports.deleteRequestById = (req, res) => {
                 console.error(err);
                 return res.status(500).send('');
             } else {
-                return res.status(200).send(`Requête supprimée : ${deletResult}`);
+                return res.status(200).send(`Requête supprimée : ${deleteResult}`);
             }
         });
 
