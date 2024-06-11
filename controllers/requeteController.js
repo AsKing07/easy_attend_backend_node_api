@@ -98,7 +98,7 @@ exports.deleteRequestById = (req, res) => {
                 console.error(err);
                 return res.status(500).send('');
             } else {
-                return res.status(200).send("Requête supprimée");
+                return res.status(200).send(`Requête supprimée : ${deletResult}`);
             }
         });
 
