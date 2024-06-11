@@ -92,7 +92,7 @@ exports.deleteRequestById = (req, res) => {
         }
 
         sqlQuery = "DELETE FROM requete WHERE idRequete = ?";
-        connection.query(sqlQuery, [idRequete], (err, deletetResult) => {
+        connection.query(sqlQuery, [idRequete], (err, deleteResult) => {
             connection.release();
             if (err) {
                 console.error(err);
