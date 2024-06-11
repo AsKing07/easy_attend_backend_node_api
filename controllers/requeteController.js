@@ -82,7 +82,7 @@ const pool = require('../config/db');
 
 //supprimer une requête
 exports.deleteRequestById = (req, res) => {
-    const { idRequete } = req.params;
+    const { id } = req.params;
     let sqlQuery;
     
     pool.getConnection((err, connection) => {
@@ -92,7 +92,7 @@ exports.deleteRequestById = (req, res) => {
         }
 
         sqlQuery = "DELETE FROM requete WHERE idRequete = ?";
-        connection.query(sqlQuery, [idRequete], (err, deleteResult) => {
+        connection.query(sqlQuery, [id], (err, deleteResult) => {
             connection.release();
             if (err) {
                 console.error(err);
