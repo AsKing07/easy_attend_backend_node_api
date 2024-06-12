@@ -1,6 +1,7 @@
 // uploadConfig.js
 const multer = require('multer');
 const path = require('path');
+const aws = require('aws-sdk');
 const multerS3 = require('multer-s3');
 
 
