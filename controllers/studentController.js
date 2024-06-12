@@ -1,5 +1,8 @@
 // const db = require('../config/db');
 const pool = require('../config/db');
+const upload = require('../config/uploadConfig');
+const aws = require('aws-sdk');
+const s3 = new aws.S3();
 
 //Creer un étudiant
 // exports.createStudent = (req, res) => {
@@ -45,6 +48,49 @@ const pool = require('../config/db');
                 return res.status(500).send('Erreur lors de la création de l\'étudiant');
             }
             res.send('Student added to SQL database');
+        });
+    });
+};
+
+//Update profile image
+exports.updatePhoto = (req, res) => {
+    const userId = req.params.userId;
+    const file = req.file;
+
+    if (!file) {
+        return res.status(400).send('No file uploaded');
+    }
+
+    // Get the old image key to delete it from S3 if necessary
+    pool.query('SELECT image FROM student WHERE uid = ?', [userId], (err, results) => {
+        if (err) {
+            return res.status(500).send('Error retrieving user image');
+        }
+
+        const oldImageKey = results[0].image ? results[0].image.split('/').pop() : null;
+
+        // Update user with new image URL
+        const imageUrl = file.location;
+        connection.query('UPDATE student SET image = ? WHERE uid = ?', [imageUrl, userId], (err, results) => {
+            if (err) {
+                return res.status(500).send('Error updating user image');
+            }
+
+            // Delete old image from S3
+            if (oldImageKey) {
+                const params = {
+                    Bucket: process.env.BUCKET_NAME,
+                    Key: oldImageKey
+                };
+
+                s3.deleteObject(params, (err, data) => {
+                    if (err) {
+                        console.error('Error deleting old image from S3:', err);
+                    }
+                });
+            }
+
+            res.send({ message: 'Image updated successfully', imageUrl: imageUrl });
         });
     });
 };
