@@ -7,7 +7,7 @@ const upload = require('../config/uploadConfig');
 
 //Student
 router.post("/", studentController.createStudent);
-router.post('/updatePhoto/:userId', upload.single, studentController.updatePhoto);
+router.post('/updatePhoto/:userId', upload.single('image'), studentController.updatePhoto);
 router.delete('/', studentController.deleteAllStudents);
 router.delete('/:id', studentController.deleteStudentById);
 router.delete('/deleteStudentsByFiliere/:filiereId', studentController.deleteStudentsByFiliere);
