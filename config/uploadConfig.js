@@ -27,7 +27,7 @@ const upload = multer({
         if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
             cb(null, true);
         } else {
-            cb(new Error('Invalid file type, only JPEG and PNG is allowed!'), false);
+            cb(new Error(`Invalid file type, only JPEG and PNG is allowed! :${file.mimetype} `), false);
         }
     },
     limits: { fileSize: 1024 * 1024 * 3 } // Limite de 3MB
