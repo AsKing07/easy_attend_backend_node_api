@@ -61,11 +61,9 @@ exports.updatePhoto = (req, res) => {
         return res.status(400).send('No file uploaded');
     }
 
-    console.log('Received file MIME type:', file.mimetype);
+    
 
-    if (file.mimetype !== 'image/jpeg' && file.mimetype !== 'image/png') {
-        return res.status(400).send('Invalid file type, only JPEG and PNG is allowed!');
-    }
+
     // Get the old image key to delete it from S3 if necessary
     pool.query('SELECT image FROM student WHERE uid = ?', [userId], (err, results) => {
         if (err) {
