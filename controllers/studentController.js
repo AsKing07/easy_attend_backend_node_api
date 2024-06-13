@@ -75,8 +75,8 @@ exports.updatePhoto = (req, res) => {
 
         // Update user with new image URL
         const imageUrl = file.location;
-        print(imageUrl);
-        print(userId);
+        console.log(imageUrl);
+        console.log(userId);
         connection.query('UPDATE student SET image = ? WHERE uid = ?', [imageUrl, userId], (err, results) => {
             if (err) {
                 console.log(err);
