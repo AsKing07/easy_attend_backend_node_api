@@ -77,7 +77,7 @@ exports.updatePhoto = (req, res) => {
         const imageUrl = file.location;
         console.log(imageUrl);
         console.log(userId);
-        connection.query('UPDATE student SET image = ? WHERE uid = ?', [imageUrl, userId], (err, results) => {
+        pool.query('UPDATE student SET image = ? WHERE uid = ?', [imageUrl, userId], (err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).send('Error updating user image');
