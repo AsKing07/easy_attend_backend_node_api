@@ -69,6 +69,7 @@ exports.updatePhoto = (req, res) => {
     // Get the old image key to delete it from S3 if necessary
     pool.query('SELECT image FROM student WHERE uid = ?', [userId], (err, results) => {
         if (err) {
+            console.log(err);
             return res.status(500).send('Error retrieving user image');
         }
 
@@ -76,8 +77,11 @@ exports.updatePhoto = (req, res) => {
 
         // Update user with new image URL
         const imageUrl = file.location;
+        print(imageUrl);
+        print(userId);
         connection.query('UPDATE student SET image = ? WHERE uid = ?', [imageUrl, userId], (err, results) => {
             if (err) {
+                console.log(err);
                 return res.status(500).send('Error updating user image');
             }
 
