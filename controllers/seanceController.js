@@ -60,7 +60,7 @@ exports.updateSeancePresence = (req, res) => {
                           res.status(500).send('Error updating seance or version mismatch');
                       });
                   }
-                  console.log(results);
+                
 
                   connection.commit(err => {
                       if (err) {
