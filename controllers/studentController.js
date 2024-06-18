@@ -482,7 +482,7 @@ exports.getStudentByMatricule = (req, res) => {
           }
       
           sqlQuery += ' ORDER BY nom, prenom';
-          console.log(sqlQuery):
+          console.log(sqlQuery);
       
           pool.query(sqlQuery, (err, result) => {
               if (err) {
