@@ -11,7 +11,7 @@ This project is a user and data management application for an online attendance 
 
 ## Backend for Attendance Management App
 
-This repository contains the backend code for an attendance management application. For the frontend repository, please visit [EasyAttend FrontEnd ](https://github.com/AsKing07/easy_attend).
+This repository contains the backend code for an attendance management application. For the frontend repository, please visit [EasyAttend FrontEnd](https://github.com/AsKing07/easy_attend).
 
 ## Configuration
 
