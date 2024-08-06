@@ -4,8 +4,12 @@ const cors = require('cors');
 const errorHandler = require('./middlewares/errorHandler');
 const adminRoutes = require('./routes/admin');
 const studentRoutes = require('./routes/student');
-const teacherRoutes = require('./routes/teacher');
-const globalRoutes = require('./routes/global');
+const seanceRoutes = require('./routes/seance');
+
+const filiereRoutes = require('./routes/filiere');
+const coursRoutes = require('./routes/cours');
+const requeteRoutes = require('./routes/requete');
+const profRoutes = require('./routes/prof');
 
 const app = express();
 
@@ -13,9 +17,13 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.use('/api/admin', adminRoutes);
-// app.use('/api/student',  studentRoutes);
-app.use('/api/teacher',  teacherRoutes);
-app.use('/api/global', globalRoutes);
+app.use('/api/student',  studentRoutes);
+app.use('/api/seance',  seanceRoutes);
+
+app.use('/api/filiere', filiereRoutes);
+app.use('/api/cours', coursRoutes);
+app.use('/api/prof', profRoutes);
+app.use('/api/requete', requeteRoutes);
 app.get('/home', (req, res) => {
   res.status(200).json('Welcome, your app is working well');
 })
